@@ -28,7 +28,7 @@ export default class Conta extends Model {
             required: ["numero_identificador", "saldo", "limite", "usuario_id"],
 
             properties: {
-                numero_identificador: { type: "string", minLength: 1, maxLength: 500 },
+                numero_identificador: { type: "integer" },
                 saldo: { type: "number" },
                 limite: { type: "number" },
                 usuario_id: { type: "integer" },
