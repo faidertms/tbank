@@ -1,0 +1,37 @@
+{
+  "name": "tbank-service",
+  "version": "0.0.1",
+  "description": "tbank-service",
+  "scripts": {
+    "tsc": "tsc",
+    "prod": "node build/app.js",
+    "start": "cross-env NODE_ENV=production npm run prod",
+    "dev": "cross-env NODE_ENV=development ts-node-dev --respawn --transpile-only ./src/app.ts",
+    "migrate": "npx knex migrate:latest --esm",
+    "seed": "npx knex seed:run",
+    "migrate:prod": "cross-env NODE_ENV=production npx knex migrate:latest --esm",
+    "test": "jest --forceExit --detectOpenHandles --maxWorkers=10",
+    "build": "npm run tsc"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "cross-env": "^7.0.3",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "pg": "^8.5.1",
+    "knex": "^0.21.19",
+    "objection": "^2.2.3"
+  },
+  "devDependencies": {
+    "@types/knex": "^0.16.1",
+    "@types/cors": "^2.8.10",
+    "@types/dotenv": "^8.2.0",
+    "@types/express": "^4.17.11",
+    "@types/node": "^14.14.37",
+    "ts-node": "^9.1.1",
+    "ts-node-dev": "^1.1.6",
+    "typescript": "^4.2.3"
+  }
+}
