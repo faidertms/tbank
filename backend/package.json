@@ -7,9 +7,8 @@
     "prod": "node build/app.js",
     "start": "cross-env NODE_ENV=production npm run prod",
     "dev": "cross-env NODE_ENV=development ts-node-dev --respawn --transpile-only ./src/app.ts",
-    "migrate": "npx knex migrate:latest --esm",
-    "seed": "npx knex seed:run",
-    "migrate:prod": "cross-env NODE_ENV=production npx knex migrate:latest --esm",
+    "db.migrate": "knex migrate:latest --esm",
+    "db.seed": "knex seed:run",
     "test": "jest --forceExit --detectOpenHandles --maxWorkers=10",
     "build": "npm run tsc"
   },
