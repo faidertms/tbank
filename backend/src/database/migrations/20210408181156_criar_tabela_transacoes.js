@@ -6,8 +6,6 @@ exports.up = function (knex) {
         table.integer('num_conta_de_origem').references('numero_identificador').inTable('contas').notNullable();
         table.integer('num_conta_de_destino').references('numero_identificador').inTable('contas').notNullable();
         table.integer('tipo_de_transacao_id').references('id').inTable('tipo_de_transacoes').notNullable();
-        
-        
     });
 };
 
