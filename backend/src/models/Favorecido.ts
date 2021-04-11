@@ -1,9 +1,12 @@
 import { Model } from "objection";
-import Conta from "./conta";
+import Conta from "./Conta";
 import Usuario from "./Usuario";
 
 export default class Favorecido extends Model {
     id!: number;
+    nome!: string;
+    cpf!: string;
+    telefone_celular!: string;
     usuario_id!: number;
     numero_da_conta!: number;
     criado_em?: Date | string;
@@ -19,12 +22,15 @@ export default class Favorecido extends Model {
     static get jsonSchema(): object {
         return {
             type: "object",
-            required: ["descricao", "conta_de_origem", "conta_de_destino", "tipo_de_transacao_id"],
+            required: ["usuario_id", "numero_da_conta"],
 
             properties: {
                 id: { type: 'integer' },
                 usuario_id: { type: "integer" },
+                telefone_celular: { type: "string" },
                 numero_da_conta: { type: "integer" },
+                cpf: { type: "string", minLength: 1, maxLength: 11 },
+                nome: { type: "string", minLength: 1, maxLength: 500 },
             }
         };
     }

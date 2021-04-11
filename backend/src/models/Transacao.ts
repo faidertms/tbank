@@ -5,8 +5,9 @@ import TipoDeTransacao from "./TipoDeTransacao";
 export default class Transacao extends Model {
     id!: number;
     valor!: number;
-    num_conta_de_origem!: Conta;
-    num_conta_de_destino!: Conta;
+    num_conta_de_origem!: number;
+    num_conta_de_destino!: number;
+    tipo_de_transacao_id!: number;
     data_hora?: Date | string;
 
     $beforeInsert(): void {

@@ -1,5 +1,4 @@
 import { Model } from "objection";
-
 export default class Usuario extends Model {
     id!: number;
     nome!: string;
@@ -23,7 +22,7 @@ export default class Usuario extends Model {
             properties: {
                 id: { type: 'integer' },
                 nome: { type: "string", minLength: 1, maxLength: 500 },
-                cpf: { type: "string" , minLength: 1, maxLength: 11 },
+                cpf: { type: "string", minLength: 1, maxLength: 11 },
                 telefone_celular: { type: "string" },
             }
         };
