@@ -1,19 +1,18 @@
 import { Model } from "objection";
 import Usuario from "./Usuario";
-
 export default class Conta extends Model {
-    numero_identificador!: string;
-    saldo!: string;
-    limite!: string;
-    usuario?: Usuario
+    numero_identificador!: number;
+    saldo!: number;
+    limite!: number;
+    usuario_id!: number;
     criado_em?: Date | string;
 
-    $beforeInsert(): void {
-        this.criado_em = new Date().toISOString();
+    static get tableName(): string {
+        return "contas";
     }
 
-    static get tableName(): string {
-        return "usuarios";
+    static get idColumn() {
+        return 'numero_identificador';
     }
 
     static get jsonSchema(): object {
