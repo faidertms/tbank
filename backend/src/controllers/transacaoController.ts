@@ -2,7 +2,6 @@ import { Request, Response, Router } from "express";
 import { ITransferirDinheiroEntreContas } from "../types";
 import { errorHandler, sendResponse } from "./coreController";
 import * as transacaoService from "../services/transacaoService";
-import Conta from "../models/Conta";
 
 const router = Router();
 
@@ -11,7 +10,7 @@ router.get('/contas/:numero_da_conta/transacoes', async (req: Request, res: Resp
         const numero_da_conta = parseInt(req.params.numero_da_conta) ?? 0;
         const transacoes = await transacaoService.getTransacoesDaConta(numero_da_conta);
         return sendResponse({
-            data: await Conta.query(),
+            data: transacoes,
             code: 200,
             res
         });
