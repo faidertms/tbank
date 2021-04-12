@@ -5,6 +5,20 @@ import * as transacaoService from "../services/transacaoService";
 
 const router = Router();
 
+router.get('/transacoes/tipos', async (req: Request, res: Response) => {
+    try {
+        const tiposDeTransacoes = await transacaoService.getTiposDeTransacoes();
+        return sendResponse({
+            data: tiposDeTransacoes,
+            code: 200,
+            res
+        });
+    } catch (error) {
+        return errorHandler({ error, res });
+    }
+});
+
+
 router.get('/contas/:numero_da_conta/transacoes', async (req: Request, res: Response) => {
     try {
         const numero_da_conta = parseInt(req.params.numero_da_conta) ?? 0;

@@ -1,5 +1,6 @@
 import { Transaction } from "objection";
 import TransferenciaRecusadaError from "../errors/TransferenciaRecusadaError";
+import TipoDeTransacao from "../models/TipoDeTransacao";
 import Transacao from "../models/Transacao";
 import { ICriarTransacao, ITransferirDinheiroEntreContas, TiposDeTransacoesEnum } from "../types";
 import { atualizarSaldoDaConta, getContaDoUsuario, getContaPorNumeroIdentificador, } from "./contaService";
@@ -9,6 +10,11 @@ export async function getTransacaoPorId(id: number): Promise<Transacao> {
         message: `Transação não encontrada: ${id}`
     });
     return transacao;
+};
+
+export async function getTiposDeTransacoes(): Promise<TipoDeTransacao[]> {
+    const tiposDeTransacoes = await TipoDeTransacao.query();
+    return tiposDeTransacoes;
 };
 
 export async function getTransacoesDaConta(numero_da_conta: number): Promise<Transacao[]> {
