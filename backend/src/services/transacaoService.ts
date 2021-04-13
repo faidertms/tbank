@@ -4,6 +4,7 @@ import TipoDeTransacao from "../models/TipoDeTransacao";
 import Transacao from "../models/Transacao";
 import { ICriarTransacao, ITransferirDinheiroEntreContas, TiposDeTransacoesEnum } from "../types";
 import { atualizarSaldoDaConta, getContaDoUsuario, getContaPorNumeroIdentificador, } from "./contaService";
+import { v4 as uuidv4 } from 'uuid';
 
 export async function getTransacaoPorId(id: number): Promise<Transacao> {
     const transacao = await Transacao.query().findById(id).throwIfNotFound({
@@ -19,8 +20,24 @@ export async function getTiposDeTransacoes(): Promise<TipoDeTransacao[]> {
 
 export async function getTransacoesDaConta(numero_da_conta: number): Promise<Transacao[]> {
     const transacoes = await Transacao.query()
-        .where({ num_conta_de_origem: numero_da_conta, })
-        .orWhere({ num_conta_de_destino: numero_da_conta });
+        .where({
+            num_conta_de_origem: numero_da_conta,
+            tipo_de_transacao_id: TiposDeTransacoesEnum.EnviarTransferencia
+        })
+        .orWhere({
+            num_conta_de_destino: numero_da_conta,
+            tipo_de_transacao_id: TiposDeTransacoesEnum.ReceberTransferencia
+        })
+        .orWhere(function () {
+            this.where({
+                num_conta_de_origem: numero_da_conta,
+                tipo_de_transacao_id: TiposDeTransacoesEnum.CancelarTransferencia
+            }).orWhere({
+                num_conta_de_destino: numero_da_conta,
+                tipo_de_transacao_id: TiposDeTransacoesEnum.CancelarTransferencia
+            })
+        })
+        .orderBy('data_hora', 'desc');
     return transacoes;
 };
 
@@ -46,6 +63,7 @@ export async function criarTransacao({
     valor,
     num_conta_de_origem,
     num_conta_de_destino,
+    numero_autenticacao,
     tipo_de_transacao,
     trx,
 }: ICriarTransacao) {
@@ -53,6 +71,7 @@ export async function criarTransacao({
         valor,
         num_conta_de_origem,
         num_conta_de_destino,
+        numero_autenticacao,
         tipo_de_transacao_id: tipo_de_transacao,
     });
     return transacao;
@@ -65,12 +84,20 @@ async function cancelarMesmaTransacaoFeitaEmDoisMinutos({
     trx
 }: ITransferirDinheiroEntreContas
 ): Promise<boolean> {
+    await Transacao.query(trx).delete()
+        .whereRaw("data_hora + interval '2 minute' > now()")
+        .where({
+            tipo_de_transacao_id: TiposDeTransacoesEnum.ReceberTransferencia,
+            valor,
+            num_conta_de_origem
+        });
     const qtdTransacoesAtualizada = await Transacao.query(trx)
         .patch({ tipo_de_transacao_id: TiposDeTransacoesEnum.CancelarTransferencia })
         .whereRaw("data_hora + interval '2 minute' > now()")
-        .where({ valor })
-        .where({ num_conta_de_origem });
-
+        .where({
+            valor,
+            num_conta_de_origem
+        });
     return qtdTransacoesAtualizada > 0;
 }
 
@@ -92,6 +119,7 @@ export async function transferirDinheiroEntreContas({
 
         const contaDeOrigem = await getContaPorNumeroIdentificador(num_conta_de_origem);
         const contaDeDestino = await getContaPorNumeroIdentificador(num_conta_de_destino);
+        const numero_autenticacao = uuidv4();
 
         //Envio da transferencia
         //Se o valor for maior que o saldo logo é preciso verificar o limite dele para poder fazer a transferencia
@@ -103,6 +131,7 @@ export async function transferirDinheiroEntreContas({
             valor,
             num_conta_de_origem,
             num_conta_de_destino,
+            numero_autenticacao,
             tipo_de_transacao: TiposDeTransacoesEnum.EnviarTransferencia,
             trx
         });
@@ -113,6 +142,7 @@ export async function transferirDinheiroEntreContas({
             valor,
             num_conta_de_origem,
             num_conta_de_destino,
+            numero_autenticacao,
             tipo_de_transacao: TiposDeTransacoesEnum.ReceberTransferencia,
             trx
         });

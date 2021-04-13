@@ -40,6 +40,7 @@ export interface ICriarTransacao {
     valor: number;
     num_conta_de_origem: number;
     num_conta_de_destino: number;
+    numero_autenticacao: string;
     tipo_de_transacao: number;
     trx?: Transaction;
 }

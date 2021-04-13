@@ -8,7 +8,7 @@ import transacaoController from "./controllers/transacaoController";
 import usuarioController from "./controllers/usuarioController";
 
 const app = express();
-const PORT = process.env.APP_PORT || 3000;
+const PORT = process.env.API_PORT || 3000;
 //Configs
 dbInit();
 //Middlewares

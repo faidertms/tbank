@@ -8,6 +8,7 @@ export default class Transacao extends Model {
     num_conta_de_origem!: number;
     num_conta_de_destino!: number;
     tipo_de_transacao_id!: number;
+    numero_autenticacao!: string;
     data_hora?: Date | string;
 
     $beforeInsert(): void {
@@ -21,13 +22,14 @@ export default class Transacao extends Model {
     static get jsonSchema(): object {
         return {
             type: "object",
-            required: ["valor", "num_conta_de_origem", "num_conta_de_destino", "tipo_de_transacao_id"],
+            required: ["numero_autenticacao", "valor", "num_conta_de_origem", "num_conta_de_destino", "tipo_de_transacao_id"],
 
             properties: {
                 id: { type: 'integer' },
                 valor: { type: "number" },
                 num_conta_de_origem: { type: "integer" },
                 num_conta_de_destino: { type: "integer" },
+                numero_autenticacao: { type: "string" },
                 tipo_de_transacao_id: { type: "integer" },
             }
         };
