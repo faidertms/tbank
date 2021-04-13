@@ -10,7 +10,6 @@ COPY . .
 RUN npm run build
 
 FROM build as test
-RUN npm run migrate:dev
 CMD [ "npm", "run", "test" ]
 
 FROM build AS development

@@ -13,11 +13,13 @@ services:
       target: ${NODE_ENV}
     restart: unless-stopped
     working_dir: /usr/src/app
+    depends_on: 
+      - db
     ports:
-      - ${APP_PORT}:${APP_PORT}
+      - ${API_PORT}:${API_PORT}
     environment:
       NODE_ENV: ${NODE_ENV}
-      APP_PORT: ${APP_PORT}
+      API_PORT: ${API_PORT}
       DB_USERNAME: ${DB_USERNAME}
       DB_PASSWORD: ${DB_PASSWORD}
       DB_DATABASE: ${DB_DATABASE}
@@ -25,6 +27,17 @@ services:
       DB_HOST: ${DB_HOST}
     networks:
       - app-network
+  app:
+    build:
+      context: ./frontend
+      target: ${NODE_ENV}
+    ports:
+      - ${APP_PORT}:3000
+    depends_on: 
+        - backend
+    environment:
+        NODE_ENV: ${NODE_ENV}
+        NEXT_PUBLIC_BANKAPI: ${NEXT_PUBLIC_BANKAPI}
   db:
     image: postgres
     restart: unless-stopped

@@ -5,6 +5,13 @@ services:
     volumes:
       - ./backend:/usr/src/app
       - /usr/src/app/node_modules/
+  app:
+    volumes:
+        - ./frontend:/app
+        - /app/node_modules/
+        - /app/.next/
+    networks:
+      - app-network
 
  
   
