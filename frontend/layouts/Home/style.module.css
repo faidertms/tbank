@@ -1,0 +1,4 @@
+.main {
+    height: calc(100vh - 3.875rem - 3rem);
+    position: relative;
+}

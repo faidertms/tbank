@@ -1,0 +1,47 @@
+.transacoesList {
+    display: flex;
+    flex-direction: column;
+    max-width: 36rem;
+    margin: auto;
+}
+
+.transacaoCard {
+    margin: 0.5rem 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: .8rem;
+    color: var(--text-black-color);
+    cursor: pointer;
+}
+
+.dataTransacao {
+    text-align: end;
+    font-size: .8rem;
+}
+
+.transacaoDetalhe {
+    display: flex;
+}
+
+.tipoTrasancao {
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.valorTransacao {
+    font-weight: 400;
+}
+
+.transacaoCancelada {
+    text-decoration: line-through;
+}
+
+.transacaoEnviada {
+    color: red;
+}
+
+.transacaoRecebida {
+    color: green;
+}

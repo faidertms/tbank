@@ -1,0 +1,28 @@
+.header {
+    position: sticky;
+    z-index: 5;
+    background-color: var(--header-color);
+    top: 0;
+    border-bottom: 1px solid var(--border-color)
+}
+
+.header>nav {
+    padding: 1rem 1.5rem;
+    color: white;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    display: flex;
+}
+
+.logo {
+    letter-spacing: -0.025em;
+    font-size: 1.25rem;
+    font-weight: 600;
+    width: 100%;
+    text-align: center;
+}
+
+.logo span {
+    cursor: pointer;
+}
