@@ -1,0 +1,18 @@
+.submitDiv {
+    padding: 1rem 0rem;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+
+.confirmButton{
+    margin-right: 0.2rem;
+}
+.confirmButton, .cancelButton {
+    padding: .5rem 0.6rem;
+    border-radius: 3px;
+    background: var(--button-color);
+    color: white;
+    border: none;
+    cursor: pointer;
+}

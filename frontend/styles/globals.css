@@ -19,14 +19,25 @@ a {
   box-sizing: border-box;
 }
 
+input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
 :root {
   --header-color: #0F766E;
   --button-color: #0F766E;
   --hover-button-color: #134e4a;
   --actionbar-color: #F0FDFA;
   --border-color: #edebe9;
-  --file-selected-border-color: #0F766E;
-  --file-selected-background-color: #0f766d10;
+  --selected-border-color: #0F766E;
+  --selected-background-color: #0f766d10;
   --hover-button-actionbar-color: rgba(0, 0, 0, .12);
   --text-black-color: rgb(32, 31, 30);
   --background-modal: #9b9a9a78;

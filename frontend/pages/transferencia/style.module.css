@@ -1,4 +1,4 @@
-.formCard {
+.transferenciaCard {
     max-width: 36rem;
     margin: 10rem auto;
     border: 1px solid var(--border-color);
@@ -7,27 +7,44 @@
     color: var(--text-black-color);
 }
 
-.formTitle {
-    margin: .2rem 0 .3rem 0;
-    font-size: 1.2rem;
-    font-weight: 700;
+.transferenciaCard>p {
+    font-size: 1rem;
+    margin: 0 0 .2rem 0;
 }
 
-.formCard>form {
+.transferenciaCard>p>span {
+    font-size: .9rem;
+    /* margin: 0 0 .2rem 0; */
+}
+
+.transferenciaValue>form {
     display: flex;
     flex-direction: column;
 }
 
-.formCard label {
+.transferenciaValue label {
     margin: .2rem 0;
 }
 
-.formCard input {
+.transferenciaValue input {
     border: 1px solid var(--border-input-color);
     margin: .2rem 0;
     border-radius: .25rem;
     padding: .375rem .75rem;
-    flex: 1;
+    width: 16rem;
+}
+
+.favorecidoLink {
+    text-align: center;
+}
+
+.favorecidoLink>a {
+    font-size: .8rem;
+    text-decoration: underline;
+    background-color: white;
+    color: var(--text-click-color);
+    cursor: pointer;
+    padding: .5rem;
 }
 
 .formSubmit {
@@ -49,9 +66,8 @@
     background-color: var(--text-secondary-color);
 }
 
-
 @media screen and (max-width: 640px) {
-    .formCard {
+    .transferenciaCard {
         margin: 2rem 1rem;
     }
 }

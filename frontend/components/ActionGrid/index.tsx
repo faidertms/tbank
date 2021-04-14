@@ -22,12 +22,14 @@ export default function ActionGrid(): JSX.Element {
                 </div>
             </ActionItem>
 
-            <ActionItem url={"/traferencia"}>
+            <ActionItem url={"/transferencia"}>
                 <div>
                     <BiTransferAlt />
                     <div>Transferência</div>
                 </div>
             </ActionItem>
+
+            
         </div>
     )
 }

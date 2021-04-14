@@ -6,8 +6,8 @@ import { IUsuarioContext, UsuarioContextProvider } from '../../../contexts/Usuar
 import AccountDetails from '../../../components/AccountDetails';
 import Loader from '../../../components/Loader';
 import { toast, ToastContainer } from "react-toastify";
-import styles from './style.module.css'
-import { useRouter } from 'next/router'
+import styles from './style.module.css';
+import { useRouter } from 'next/router';
 import 'react-toastify/dist/ReactToastify.css';
 import {
     getContaDoUsuario,

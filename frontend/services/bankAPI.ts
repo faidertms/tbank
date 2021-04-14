@@ -63,7 +63,11 @@ export type UpdateFavorecidoRequest = {
     nome: string;
     telefone_celular: string;
 }
-
+export type TransferenciaEntreContas = {
+    valor: number;
+    num_conta_de_origem: number;
+    num_conta_de_destino: number;
+}
 const baseURL: string = process.env.NEXT_PUBLIC_BANKAPI ?? "http://backend:3001";
 const usuarioId = 1;
 
@@ -90,6 +94,11 @@ export const getContaDoUsuario = async (): Promise<AxiosResponse<Conta>> => {
 
 export const getTransacoesDaConta = async (numero_da_conta: number): Promise<AxiosResponse<Transacao[]>> => {
     const response = await bankApi.get<Transacao[]>(`/contas/${numero_da_conta}/transacoes`);
+    return response;
+}
+
+export const transferirValorEntreContas = async (data: TransferenciaEntreContas): Promise<AxiosResponse<Transacao>> => {
+    const response = await bankApi.post<Transacao>(`/transacoes/transferencia-entre-contas`, data);
     return response;
 }
 
@@ -121,4 +130,6 @@ export const deleteFavorecidosDoUsuario = async (favorecidoId: number): Promise<
     const response = await bankApi.delete<undefined>(`/usuarios/${usuarioId}/favorecidos/${favorecidoId}`);
     return response;
 }
+
+
 

@@ -9,8 +9,8 @@
 }
 
 .actionItem:hover {
-    border-color: var(--file-selected-border-color);
-    background-color: var(--file-selected-background-color);
+    border-color: var(--selected-border-color);
+    background-color: var(--selected-background-color);
 }
 
 .actionContent {
