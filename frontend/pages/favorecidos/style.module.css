@@ -1,0 +1,28 @@
+.favorecidosGrid {
+    height: 100%;
+    width: 100%;
+    padding: 3rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1rem;
+    overflow: hidden;
+    overflow-y: auto;
+}
+
+.createButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    margin: .75rem 0 0 .75rem;
+    border: 1px solid transparent;
+    background-color: var(--button-color);
+    color: white;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    border-radius: .25rem;
+}
+
+.createButton:hover {
+    background-color: var(--hover-button-color);
+}

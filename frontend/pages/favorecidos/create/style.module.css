@@ -1,0 +1,51 @@
+.formCard {
+    max-width: 36rem;
+    margin: 10rem auto;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 1.5rem;
+    color: var(--text-black-color);
+}
+
+.formTitle {
+    margin: .2rem 0 .3rem 0;
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+.formCard>form {
+    display: flex;
+    flex-direction: column;
+}
+
+.formCard label {
+    margin: .2rem 0;
+}
+
+.formCard input {
+    border: 1px solid var(--border-input-color);
+    margin: .2rem 0;
+    appearance: none;
+    border-radius: .25rem;
+    padding: .375rem .75rem;
+    flex: 1;
+}
+
+.formSubmit {
+    color: white;
+    cursor: pointer;
+    background-color: var(--button-color);
+    border: 1px solid transparent;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    margin-top: .5rem;
+    border-radius: .25rem;
+}
+
+.formSubmit:hover {
+    background-color: var(--hover-button-color);
+}
+
+.formSubmit:disabled {
+    background-color: var(--text-secondary-color);
+}

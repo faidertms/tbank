@@ -51,10 +51,23 @@ export enum TiposDeTransacoesEnum {
     CancelarTransferencia = 3,
 }
 
+
+export type CreateFavorecidoRequest = {
+    nome: string;
+    cpf: string;
+    telefone_celular: string;
+    numero_da_conta: number;
+}
+
+export type UpdateFavorecidoRequest = {
+    nome: string;
+    telefone_celular: string;
+}
+
 const baseURL: string = process.env.NEXT_PUBLIC_BANKAPI ?? "http://backend:3001";
 const usuarioId = 1;
 
-export const usuarioApi: AxiosInstance = axios.create({
+export const bankApi: AxiosInstance = axios.create({
     baseURL: baseURL,
     timeout: 240000,
     headers:
@@ -63,25 +76,49 @@ export const usuarioApi: AxiosInstance = axios.create({
     },
 });
 
-axiosRetry(usuarioApi, { retries: 3 });
+axiosRetry(bankApi, { retries: 3 });
 
 export const getUsuario = async (): Promise<AxiosResponse<Usuario>> => {
-    const response = await usuarioApi.get<Usuario>(`/usuarios/${usuarioId}`);
+    const response = await bankApi.get<Usuario>(`/usuarios/${usuarioId}`);
     return response;
 }
 
 export const getContaDoUsuario = async (): Promise<AxiosResponse<Conta>> => {
-    const response = await usuarioApi.get<Conta>(`/usuarios/${usuarioId}/conta`);
+    const response = await bankApi.get<Conta>(`/usuarios/${usuarioId}/conta`);
     return response;
 }
 
-export const getTransacoes = async (numero_da_conta: number): Promise<AxiosResponse<Transacao[]>> => {
-    const response = await usuarioApi.get<Transacao[]>(`/contas/${numero_da_conta}/transacoes`);
+export const getTransacoesDaConta = async (numero_da_conta: number): Promise<AxiosResponse<Transacao[]>> => {
+    const response = await bankApi.get<Transacao[]>(`/contas/${numero_da_conta}/transacoes`);
     return response;
 }
 
 export const getTiposDeTransacoes = async (): Promise<AxiosResponse<TipoDeTransacao[]>> => {
-    const response = await usuarioApi.get<TipoDeTransacao[]>(`/transacoes/tipos`);
+    const response = await bankApi.get<TipoDeTransacao[]>(`/transacoes/tipos`);
+    return response;
+}
+
+export const getFavorecidosDoUsuario = async (): Promise<AxiosResponse<Favorecido[]>> => {
+    const response = await bankApi.get<Favorecido[]>(`/usuarios/${usuarioId}/favorecidos`);
+    return response;
+}
+
+export const getFavorecidoDoUsuarioPorId = async (favorecidoId: number): Promise<AxiosResponse<Favorecido>> => {
+    const response = await bankApi.get<Favorecido>(`/usuarios/${usuarioId}/favorecidos/${favorecidoId}`);
+    return response;
+}
+export const createFavorecidosDoUsuario = async (data: CreateFavorecidoRequest): Promise<AxiosResponse<Favorecido>> => {
+    const response = await bankApi.post<Favorecido>(`/usuarios/${usuarioId}/favorecidos`, data);
+    return response;
+}
+
+export const updateFavorecidosDoUsuario = async (favorecidoId: number, data: UpdateFavorecidoRequest): Promise<AxiosResponse<undefined>> => {
+    const response = await bankApi.put<undefined>(`/usuarios/${usuarioId}/favorecidos/${favorecidoId}`, data);
+    return response;
+}
+
+export const deleteFavorecidosDoUsuario = async (favorecidoId: number): Promise<AxiosResponse<undefined>> => {
+    const response = await bankApi.delete<undefined>(`/usuarios/${usuarioId}/favorecidos/${favorecidoId}`);
     return response;
 }
 

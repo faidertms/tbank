@@ -1,5 +1,3 @@
-
-
 export const formatValueNumeric = (value: number = 0, formatter: string, decimal: number = 2): any => {
     switch (formatter) {
         case "money":
@@ -13,3 +11,32 @@ export const formatValueNumeric = (value: number = 0, formatter: string, decimal
             return value;
     }
 }
+export const onlyNumber = (value: string): string => {
+    return value.replace(/\D/g, "")
+}
+export const cellPhoneMask = (number: string): string => {
+    return number.replace(/\D/g, "")                 //Remove tudo o que não é dígito
+        .replace(/^(\d\d)(\d)/g, "($1) $2") //Coloca parênteses em volta dos dois primeiros dígitos
+        .replace(/(\d{5})(\d)/, "$1-$2")
+        .substring(0, 15);   //Coloca hífen entre o quarto e o quinto dígitos
+}
+
+export const cpfMask = (value: string): string => {
+    return value
+        .replace(/\D/g, '')
+        .replace(/(\d{3})(\d)/, '$1.$2')
+        .replace(/(\d{3})(\d)/, '$1.$2')
+        .replace(/(\d{3})(\d{1,2})/, '$1-$2')
+        .replace(/(-\d{2})\d+?$/, '$1');
+};
+
+export const cnpjMask = (value: string): string => {
+    return value
+        .replace(/\D/g, '')
+        .replace(/^(\d{2})(\d)/, "$1.$2")
+        .replace(/^(\d{2})\.(\d{3})(\d)/, "$1.$2.$3")
+        .replace(/\.(\d{3})(\d)/, ".$1/$2")
+        .replace(/(\d{4})(\d)/, "$1-$2");
+};
+
+export const cpfCnpjMask = (value: string): string => (value.length <= 14 ? cpfMask(value) : cnpjMask(value));

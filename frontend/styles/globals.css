@@ -22,6 +22,7 @@ a {
 :root {
   --header-color: #0F766E;
   --button-color: #0F766E;
+  --hover-button-color: #134e4a;
   --actionbar-color: #F0FDFA;
   --border-color: #edebe9;
   --file-selected-border-color: #0F766E;
@@ -30,4 +31,7 @@ a {
   --text-black-color: rgb(32, 31, 30);
   --background-modal: #9b9a9a78;
   --border-input-color: #9b9a9a78;
+  --text-secondary-color: #71717A;
+  --text-click-color: #3B82F6;
+  --hover-text-click-color: #1D4ED8;
 }
