@@ -37,6 +37,9 @@ export const errorHandler = ({ values, message, code, res, error }: IErrorHandle
                 res.status(400).send({
                     code: 400,
                     message: "Model Validation",
+                    values: {
+                        columns: error.data
+                    }
                 });
                 break;
             case 'RelationExpression':
