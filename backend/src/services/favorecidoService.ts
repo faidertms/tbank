@@ -3,8 +3,8 @@ import { ICriarFavorecido, IEditarFavorecido } from "../types";
 import { criarUsuario } from "./usuarioService";
 import { verificarSeContaExiste } from "./contaService";
 
-export async function getFavorecidoPorId(id: number): Promise<Favorecido> {
-    const favorecido = await Favorecido.query().findById(id).throwIfNotFound({
+export async function getFavorecidoDoUsuarioPorId(id: number, usuario_id: number): Promise<Favorecido> {
+    const favorecido = await Favorecido.query().findOne({ id, usuario_id }).throwIfNotFound({
         message: `Favorecido não encontrado: ${id}`
     });
     return favorecido;

@@ -34,6 +34,21 @@ router.post('/usuarios/:usuario_id/favorecidos', async (req: Request, res: Respo
     }
 });
 
+router.get('/usuarios/:usuario_id/favorecidos/:favorecido_id', async (req: Request, res: Response) => {
+    try {
+        const usuario_id = parseInt(req.params.usuario_id) ?? 0;
+        const favorecido_id = parseInt(req.params.favorecido_id) ?? 0;
+        const favorecido = await favorecidoService.getFavorecidoDoUsuarioPorId(favorecido_id, usuario_id);
+        sendResponse({
+            data: favorecido,
+            code: 201,
+            res
+        });
+    } catch (error) {
+        errorHandler({ error, res });
+    }
+});
+
 router.put('/usuarios/:usuario_id/favorecidos/:favorecido_id', async (req: Request, res: Response) => {
     try {
         const usuario_id = parseInt(req.params.usuario_id) ?? 0;
