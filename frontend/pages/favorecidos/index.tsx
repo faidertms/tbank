@@ -15,7 +15,7 @@ interface Props extends IUsuarioContext {
     favorecidos: Favorecido[];
 }
 
-export default function Home({ conta, usuario, favorecidos }: Props) {
+export default function Favorecidos({ conta, usuario, favorecidos }: Props) {
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const router = useRouter();
 
