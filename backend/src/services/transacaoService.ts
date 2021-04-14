@@ -41,17 +41,6 @@ export async function getTransacoesDaConta(numero_da_conta: number): Promise<Tra
     return transacoes;
 };
 
-export async function getUltimaTransacaoParaConta(
-    num_conta_de_origem: number,
-    num_conta_de_destino: number,
-    valor: number,
-    trx: Transaction
-): Promise<boolean> {
-    const transacoes = await Transacao.query(trx).whereRaw("data_hora + interval '2 minute' > now()")
-        .where({ num_conta_de_origem, num_conta_de_destino, valor }).first();
-    return transacoes ? true : false;
-};
-
 export async function getTransacoesDoUsuario(usuario_id: number): Promise<Transacao[]> {
     //TODO - pode ser feito um inner join para otimizar...
     const conta = await getContaDoUsuario(usuario_id);
@@ -81,6 +70,7 @@ export async function criarTransacao({
 async function cancelarMesmaTransacaoFeitaEmDoisMinutos({
     valor,
     num_conta_de_origem,
+    num_conta_de_destino,
     trx
 }: ITransferirDinheiroEntreContas
 ): Promise<boolean> {
@@ -89,14 +79,16 @@ async function cancelarMesmaTransacaoFeitaEmDoisMinutos({
         .where({
             tipo_de_transacao_id: TiposDeTransacoesEnum.ReceberTransferencia,
             valor,
-            num_conta_de_origem
+            num_conta_de_origem,
+            num_conta_de_destino
         });
     const qtdTransacoesAtualizada = await Transacao.query(trx)
         .patch({ tipo_de_transacao_id: TiposDeTransacoesEnum.CancelarTransferencia })
         .whereRaw("data_hora + interval '2 minute' > now()")
         .where({
             valor,
-            num_conta_de_origem
+            num_conta_de_origem,
+            num_conta_de_destino
         });
     return qtdTransacoesAtualizada > 0;
 }
