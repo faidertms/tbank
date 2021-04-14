@@ -35,7 +35,7 @@ export default function TransacaoList({
             {transacoes.map(transacao => {
                 const tipoDeTransacao = tiposDeTransacoes.find(tipo => (tipo.id === transacao.tipo_de_transacao_id));
                 return (
-                    <div className={styles.transacaoCard} >
+                    <div className={styles.transacaoCard} key={transacao.id}>
                         <div className={styles.transacaoDetalhe}>
                             <span className={styles.tipoTrasancao}>
                                 {tipoDeTransacao?.descricao}
