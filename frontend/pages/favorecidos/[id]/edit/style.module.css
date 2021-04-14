@@ -49,3 +49,10 @@
 .formSubmit:disabled {
     background-color: var(--text-secondary-color);
 }
+
+
+@media screen and (max-width: 640px) {
+    .formCard {
+        margin: 2rem 1rem;
+    }
+}
