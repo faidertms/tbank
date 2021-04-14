@@ -34,7 +34,7 @@ router.get('/contas/:numero_da_conta/transacoes', async (req: Request, res: Resp
 });
 
 
-router.post('/transacoes/transfencia-entre-contas', async (req: Request, res: Response) => {
+router.post('/transacoes/transferencia-entre-contas', async (req: Request, res: Response) => {
     try {
         const dados: ITransferirDinheiroEntreContas = req.body;
         const transacao = await transacaoService.transferirDinheiroEntreContas(dados);

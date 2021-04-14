@@ -84,7 +84,7 @@ describe("Testando usuario API", () => {
 
 
     test("Transferir para Conta do Favorecido", async () => {
-        const response = await request(app).post(`/transacoes/transfencia-entre-contas`).send({
+        const response = await request(app).post(`/transacoes/transferencia-entre-contas`).send({
             valor: 50.00,
             num_conta_de_origem: contaDoUsuario.numero_identificador,
             num_conta_de_destino: numeroDaContaFavorecido
@@ -107,7 +107,7 @@ describe("Testando usuario API", () => {
 
     test("Transferir para Conta do Favorecido com o mesmo valor em menos de 2 minutos", async () => {
         // vai cancelar transferência a antiga e deixa a mais recente logo vai ter o mesmo saldo
-        const response = await request(app).post(`/transacoes/transfencia-entre-contas`).send({
+        const response = await request(app).post(`/transacoes/transferencia-entre-contas`).send({
             valor: 50.00,
             num_conta_de_origem: contaDoUsuario.numero_identificador,
             num_conta_de_destino: numeroDaContaFavorecido
@@ -130,7 +130,7 @@ describe("Testando usuario API", () => {
 
     test("Favorecido transferir de volta o mesmo valor", async () => {
         // vai cancelar transferência a antiga e deixa a mais recente logo vai ter o mesmo saldo
-        const response = await request(app).post(`/transacoes/transfencia-entre-contas`).send({
+        const response = await request(app).post(`/transacoes/transferencia-entre-contas`).send({
             valor: 50.00,
             num_conta_de_origem: numeroDaContaFavorecido,
             num_conta_de_destino: contaDoUsuario.numero_identificador,
@@ -153,7 +153,7 @@ describe("Testando usuario API", () => {
 
     test("Transferir valor acima do limite + saldo", async () => {
         // vai verificar se o valor é maior que o limite + saldo se sim deve voltar erro.
-        const response = await request(app).post(`/transacoes/transfencia-entre-contas`).send({
+        const response = await request(app).post(`/transacoes/transferencia-entre-contas`).send({
             valor: 500000000000.00,
             num_conta_de_origem: numeroDaContaFavorecido,
             num_conta_de_destino: contaDoUsuario.numero_identificador,
