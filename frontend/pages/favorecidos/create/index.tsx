@@ -79,7 +79,7 @@ export default function create({ usuario, conta }: Props): JSX.Element {
                 newValue = cellPhoneMask(value);
                 break;
             case "numero_da_conta":
-                newValue = onlyNumber(value);
+                newValue = onlyNumber(value).substring(0, 8);
                 break;
             default:
                 break;
