@@ -29,6 +29,8 @@ services:
       - app-network
   app:
     build:
+      args: 
+        - NEXT_PUBLIC_BANKAPI_URL=$NEXT_PUBLIC_BANKAPI_URL
       context: ./frontend
       target: ${NODE_ENV}
     ports:
