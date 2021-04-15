@@ -3,8 +3,8 @@
 Este projeto foi realizado para um desafio.
 
 Quando eu tiver tempo irei disponibilizar no meu dominio.
-Demo-site: [http://tbank.thiagotms.tech](http://tbank.thiagotms.tech) ! 
-Demo-api: [http://tbank-api.thiagotms.tech](http://tbank-api.thiagotms.tech) !  
+Demo-site: [http://tbank.thiagotms.tech](http://tbank.thiagotms.tech) !    
+Demo-api: [http://tbank-api.thiagotms.tech](http://tbank-api.thiagotms.tech) !   
 
 ## Esse projeto usa :sparkles: 
 :heavy_check_mark: Javascript(ES6+)    
