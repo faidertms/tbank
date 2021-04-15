@@ -17,9 +17,15 @@ interface Props extends IUsuarioContext {
     favorecido: Favorecido | null;
 }
 
+interface ModalData {
+    isOpen: boolean,
+    title: string,
+    message: string,
+}
+
 export default function Transferencia({ conta, usuario, favorecido }: Props): JSX.Element {
     const router = useRouter();
-    const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+    const [modalData, setModalData] = useState<ModalData>({ isOpen: false, title: "", message: "" });
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [isFormValid, setIsFormValid] = useState<boolean>(true);
     const [valorTransferencia, setValorTransferencia] = useState<string>('');
@@ -31,6 +37,9 @@ export default function Transferencia({ conta, usuario, favorecido }: Props): JS
         );
     }, [valorTransferencia])
 
+    const closeModal = () => {
+        setModalData(prevState => ({ ...prevState, isOpen: false }));
+    }
 
     const onChangeValue = (event: ChangeEvent<HTMLInputElement>) => {
         const newValue = moneyMask(event.target.value);
@@ -40,15 +49,22 @@ export default function Transferencia({ conta, usuario, favorecido }: Props): JS
     const handleSubmit = async (event: FormEvent<HTMLFormElement>): Promise<void> => {
         event.preventDefault();
         if (conta.saldo >= moneyMaskToNumber(valorTransferencia)) {
-            await transferirValor();
+            setModalData({
+                title: "Transferência",
+                message: "Deseja continuar?",
+                isOpen: true
+            });
         } else {
-            //Modal de confirmação que vai usar o limite
-            setIsModalOpen(true);
+            setModalData({
+                title: "Transferência acima do saldo",
+                message: "Valor da transferência é maior que o saldo disponível da sua conta logo será usado o limite para complementar. Deseja continuar?",
+                isOpen: true
+            });
         }
-
     }
+
     const transferirValor = async (): Promise<void> => {
-        setIsModalOpen(false);
+        closeModal();
         setIsLoading(true);
         try {
             await transferirValorEntreContas({
@@ -102,10 +118,8 @@ export default function Transferencia({ conta, usuario, favorecido }: Props): JS
                 </div>
                 <ToastContainer />
                 <ModalConfirm
-                    isOpen={isModalOpen}
-                    onClose={() => setIsModalOpen(false)}
-                    title="Transferência acima do saldo"
-                    message="Valor da transferência é maior que o saldo disponível da sua conta logo será usado o limite para complementar. Deseja continuar?"
+                    {...modalData}
+                    onClose={closeModal}
                     submitForm={transferirValor}
                 />
             </HomeLayout>
