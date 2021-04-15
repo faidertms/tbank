@@ -37,7 +37,8 @@ services:
         - backend
     environment:
         NODE_ENV: ${NODE_ENV}
-        NEXT_PUBLIC_BANKAPI: ${NEXT_PUBLIC_BANKAPI}
+        NEXT_PUBLIC_BANKAPI_URL: ${NEXT_PUBLIC_BANKAPI_URL}
+        BANKAPI_URL: ${BANKAPI_URL}
   db:
     image: postgres
     restart: unless-stopped
