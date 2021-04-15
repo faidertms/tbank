@@ -6,11 +6,23 @@ import styles from './style.module.css';
 
 export default function AccountDetails() {
     const { conta } = useContext(UsuarioContext);
+    const saldoNegativoClass = conta.saldo < 0 ? styles.saldoNegativo : undefined;
     return (
         <div className={styles.accountDetails}>
-            <div>
-                Saldo: {formatValueNumeric(conta.saldo, 'money', 2)}
-            </div>
+
+            <p>
+                {"Saldo: "}
+                <span className={saldoNegativoClass}>
+                    {formatValueNumeric(conta.saldo, 'money', 2)}
+                </span>
+            </p>
+            <p>
+                {"Limite: "}
+                <span>
+                    {formatValueNumeric(conta.limite, 'money', 2)}
+                </span>
+            </p>
+
         </div>
     )
 }

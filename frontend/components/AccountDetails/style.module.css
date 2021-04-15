@@ -8,3 +8,15 @@
     align-items: center;
     justify-content: center;
 }
+
+.accountDetails>p {
+    margin: 0;
+}
+
+.accountDetails>p:first-child {
+    margin-right: .5rem;
+}
+
+.saldoNegativo {
+    color: red
+}
