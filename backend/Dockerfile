@@ -17,5 +17,5 @@ CMD ["npm", "run", "dev"]
 
 FROM base AS production
 COPY --from=build /usr/src/app/build ./build
-RUN npm install --production && npm run migrate
+RUN npm install --production
 CMD ["npm", "start"]
