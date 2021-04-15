@@ -37,6 +37,7 @@ export async function getTransacoesDaConta(numero_da_conta: number): Promise<Tra
                 tipo_de_transacao_id: TiposDeTransacoesEnum.CancelarTransferencia
             })
         })
+        .withGraphFetched('favorecido')
         .orderBy('data_hora', 'desc');
     return transacoes;
 };

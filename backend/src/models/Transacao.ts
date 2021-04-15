@@ -1,5 +1,6 @@
 import { Model } from "objection";
 import Conta from "./Conta";
+import Favorecido from "./Favorecido";
 import TipoDeTransacao from "./TipoDeTransacao";
 
 export default class Transacao extends Model {
@@ -52,6 +53,14 @@ export default class Transacao extends Model {
             join: {
                 from: 'transacoes.num_conta_de_origem',
                 to: 'contas.numero_identificador',
+            },
+        },
+        favorecido: {
+            relation: Model.HasOneRelation,
+            modelClass: Favorecido,
+            join: {
+                from: 'transacoes.num_conta_de_destino',
+                to: 'favorecidos.numero_da_conta',
             },
         },
         tipo_de_transacao: {
