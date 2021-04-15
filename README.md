@@ -1,8 +1,7 @@
 # TBank
 
-Este projeto foi realizado para um desafio.
+Este projeto foi realizado para um desafio.  
 
-Quando eu tiver tempo irei disponibilizar no meu dominio.
 Demo-site: [http://tbank.thiagotms.tech](http://tbank.thiagotms.tech) !    
 Demo-api: [http://tbank-api.thiagotms.tech](http://tbank-api.thiagotms.tech) !   
 
@@ -14,7 +13,7 @@ Demo-api: [http://tbank-api.thiagotms.tech](http://tbank-api.thiagotms.tech) !
 :heavy_check_mark: ObjectionJS e Knex  
 :heavy_check_mark: Postgres
 :heavy_check_mark: Docker   
-:heavy_check_mark: Jest(Banck-end apenas)  
+:heavy_check_mark: Jest(Backend apenas)  
 
 ## Coisas que podem ser feitas no projeto :clipboard::construction::construction_worker:  
 - CI/CD  
