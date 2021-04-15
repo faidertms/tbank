@@ -19,7 +19,7 @@ FROM builder AS development
 CMD ["npm","run","dev"]
 
 # Production image, copy all the files and run next
-FROM node:alpine AS runner
+FROM node:alpine AS production
 WORKDIR /app
 
 # You only need to copy next.config.js if you are NOT using the default configuration
