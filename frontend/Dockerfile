@@ -11,6 +11,7 @@ RUN npm ci
 # Rebuild the source code only when needed
 FROM node:alpine AS builder
 WORKDIR /app
+ARG NEXT_PUBLIC_BANKAPI_URL="http://tbank-api.thiagotms.tech"
 ENV NEXT_PUBLIC_BANKAPI_URL="${NEXT_PUBLIC_BANKAPI_URL}"
 COPY . .
 COPY --from=deps /app/node_modules ./node_modules
