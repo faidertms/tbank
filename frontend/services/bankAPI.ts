@@ -27,6 +27,7 @@ export type Transacao = {
     num_conta_de_origem: number;
     num_conta_de_destino: number;
     tipo_de_transacao_id: number;
+    favorecido: Favorecido;
     data_hora: Date | string;
 }
 
@@ -68,7 +69,8 @@ export type TransferenciaEntreContas = {
     num_conta_de_origem: number;
     num_conta_de_destino: number;
 }
-const baseURL: string = process.env.NEXT_PUBLIC_BANKAPI ?? "http://backend:3001";
+
+const baseURL: string = (process.env.BANKAPI_URL || process.env.NEXT_PUBLIC_BANKAPI_URL) ?? "http://backend:3001";
 const usuarioId = 1;
 
 export const bankApi: AxiosInstance = axios.create({

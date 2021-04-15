@@ -44,6 +44,11 @@ export default function TransacaoList({
                                 {formatValorTransacao(transacao)}
                             </span>
                         </div>
+                        <div className={styles.favorecidoTransacao} >
+                            <span>
+                                Favorecido: {transacao.favorecido.nome}
+                            </span>
+                        </div>
                         <div className={styles.dataTransacao} >
                             <span>
                                 {new Date(transacao.data_hora).toLocaleString()}
